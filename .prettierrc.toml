@@ -1,0 +1,13 @@
+# .prettierrc.toml
+trailingComma = "es5"
+printWidth = 80
+tabWidth = 4
+useTabs = true
+semi = true
+bracketSpacing = true
+bracketSameLine = false
+
+[[overrides]]
+files = "*.ejs"
+  [overrides.options]
+  parser = "html"

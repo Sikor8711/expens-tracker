@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head.ejs') -%>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="w">
+                <div class="tab">
+                    <button id="defaultOpen" class="tablinks" onclick="_changeTab(event, 'login')">Log in</button>
+                    <button class="tablinks" onclick="_changeTab(event, 'signin')">Sign in</button>
+                </div>
+                <div id="login" class="tabcontent">
+                    <form action="/api/auth/login" method="post">
+                        <p>
+                            <label for="email">Email</label>
+                            <input type="email" name="email" value="" required placeholder="example@example.com">
+                        </p>
+                        <p>
+                            <label for="password">Password</label>
+                            <input type="password" name="password" value="" required>
+                            <span>
+                                <input type="checkbox" onclick="_showPassword(this)">
+                                Show Password
+                            </span>
+                        </p>
+                        <button type="submit">Log in</button>
+                    </form>
+                </div>
+                <div id="signin" class="tabcontent">
+                    <form id="signInForm" action="/api/auth/signin" method="post">
+                        <p>
+                            <label for="text">First name</label>
+                            <input type="text" name="firstName" value="" required placeholder="Jane / John">
+                        </p>
+                        <p>
+                            <label for="email">Email</label>
+                            <input type="email" name="email" value="" required placeholder="example@example.com">
+                        </p>
+                        <p>
+                            <label for="password">Password</label>
+                            <input id="pw" type="password" name="password" required>
+                            <span>
+                                <input type="checkbox" onclick="_showPassword(this)">
+                                Show Password
+                            </span>
+                        </p>
+                        <p>
+                            <label for="password">Confirm Password</label>
+                            <input id="cpw" type="password" name="confirmPassword" required>
+                            <span>
+                                <input type="checkbox" onclick="_showPassword(this)">
+                                Show Password
+                            </span>
+                        </p>
+                        <button class="disable" id="subBtn" type="submit">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="/scripts/main.js"></script>
+        <script> 
+document.getElementById("defaultOpen")?.click();
+
+document.getElementById('signInForm').addEventListener('input', function() {
+    validateForm();
+})
+
+function validateForm() {
+    const password = document.getElementById("pw");
+    const confirmPassword = document.getElementById("cpw");
+    const subBtn = document.getElementById("subBtn");
+
+    let isValid = true;
+    if (!password || !confirmPassword) {
+        isValid = false;
+    };
+
+    if (password.value === confirmPassword.value) {
+        isValid = true;
+    } else {
+        isValid = false;
+    };
+    if (isValid) {
+        subBtn.classList.add('enable');
+        subBtn.classList.remove('disable');
+    } else {
+        subBtn.classList.add('disable');
+        subBtn.classList.remove('enable');
+    };
+
+};
+
+</script>
+    </body>
+</html 
