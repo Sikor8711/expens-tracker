@@ -5,7 +5,7 @@
     "checkJs": true
   },
   "tasks": {
-    "dev": "deno run -A server.ts",
+    "dev": "deno run -A server.js",
     "migrate": "deno run -A ./node_modules/.bin/node-pg-migrate"
   },
   "imports": {

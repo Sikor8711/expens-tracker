@@ -1,9 +1,9 @@
 import express from "npm:express@5.0.1";
 import * as path from "https://deno.land/std@0.188.0/path/mod.ts";
 import morgan from "npm:morgan";
-import api from "./src/routes/Api.ts";
-import index from "./src/routes/Index.ts";
-import auth from "./src/routes/Auth.ts";
+import api from "./src/routes/Api.js";
+import index from "./src/routes/Index.js";
+import auth from "./src/routes/Auth.js";
 
 import cookieParser from "npm:cookie-parser@1.4.7";
 import livereload from "npm:livereload@0.9.3";
