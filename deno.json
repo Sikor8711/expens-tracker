@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "compilerOptions": {
-    "lib": ["dom"],
+    "lib": ["deno.ns","dom"],
     "checkJs": true
   },
   "tasks": {

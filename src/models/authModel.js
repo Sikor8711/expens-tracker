@@ -1,4 +1,5 @@
 /**@typedef {import("../types.d.ts").User } User*/
+/**@typedef {import("../types.d.ts").Login } Login*/
 import {
 	hash,
 	genSalt,
@@ -8,27 +9,7 @@ import pgPromise from "npm:pg-promise";
 import db from "../../db.js";
 const PQ = pgPromise.ParameterizedQuery;
 
-/**@function hashPassword
- * @param {string} password
- * @returns {Promise<string>} */
-async function hashPassword(password) {
-	/**@type {string}*/
-	const plainPassword = password;
-	/**@type {number}*/
-	const saltRounds = 10;
-	const salt = await genSalt(saltRounds);
-	return await hash(plainPassword, salt);
-}
-
-/**@function comparePassword
- * @param {string} password
- * @param {string} hashedPassword
- * @returns {Promise<boolean>} */
-export async function comparePassword(password, hashedPassword) {
-	return await compare(password, hashedPassword);
-}
-
-/** @function checkUser
+/**@function checkUser
  * @param {string} email
  * @returns {Promise<User | null>} */
 export async function checkUser(email) {
@@ -39,7 +20,7 @@ export async function checkUser(email) {
 	return await db.oneOrNone(data);
 }
 
-/** @function addOneUser
+/**@function addOneUser
  * @param {string} firstName
  * @param {string} email
  * @param {string} password
@@ -52,7 +33,7 @@ export async function addOneUser(firstName, email, password, lastName) {
 		console.log(userExist);
 		return { message: "User already exists" };
 	} else {
-		const hashedPssw = await hashPassword(password);
+		const hashedPssw = await hash(password, await genSalt(10));
 		const data = new PQ({
 			text: "INSERT INTO users(first_name, last_name, email, password) VALUES($1, $2, $3, $4)",
 			values: [firstName, lastName, email, hashedPssw],
@@ -60,14 +41,21 @@ export async function addOneUser(firstName, email, password, lastName) {
 		return await db
 			.none(data)
 			.then(() => {
-				console.log("User added");
 				return { userAdded: true };
 			})
 			.catch((error) => {
-				return {
-					userAdded: false,
-					error,
-				};
+				return { userAdded: false, error };
 			});
 	}
+}
+
+/**@function loginUser @param {string} email @param {string} password @returns {Promise<Login>}*/
+export async function loginUser(email, password) {
+	let login = false;
+	/**@type {User | null}*/
+	const user = await checkUser(email);
+	if (user) {
+		login = await compare(password, user.password);
+	}
+	return { login };
 }

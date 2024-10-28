@@ -6,3 +6,7 @@ export interface User {
     password: string;
     createdAt?: Date;
 }
+
+export interface Login {
+    login: boolean;
+}
