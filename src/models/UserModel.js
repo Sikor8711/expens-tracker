@@ -1,10 +1,6 @@
 /**@typedef {import("../types.d.ts").User } User*/
 /**@typedef {import("../types.d.ts").Login } Login*/
-import {
-	hash,
-	genSalt,
-	compare,
-} from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
+import { hash, genSalt } from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 import pgPromise from "npm:pg-promise";
 import db from "../../db.js";
 const PQ = pgPromise.ParameterizedQuery;
@@ -47,15 +43,4 @@ export async function addOneUser(firstName, email, password, lastName) {
 				return { userAdded: false, error };
 			});
 	}
-}
-
-/**@function loginUser @param {string} email @param {string} password @returns {Promise<Login>}*/
-export async function loginUser(email, password) {
-	let login = false;
-	/**@type {User | null}*/
-	const user = await checkUser(email);
-	if (user) {
-		login = await compare(password, user.password);
-	}
-	return { login };
 }

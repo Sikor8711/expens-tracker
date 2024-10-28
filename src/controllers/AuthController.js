@@ -2,7 +2,8 @@
 import asyncHandler from "npm:express-async-handler@1.2.0";
 
 import * as path from "https://deno.land/std@0.188.0/path/mod.ts";
-import { addOneUser, loginUser } from "../models/authModel.js";
+import { loginUser } from "../models/AuthModel.js";
+import { addOneUser } from "../models/UserModel.js";
 const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 
 export const auth_index = asyncHandler(async (req, res, next) => {
@@ -13,9 +14,11 @@ export const auth_login = asyncHandler(async (req, res, next) => {
 	const { email, password } = await req.body;
 	const data = await loginUser(email, password);
 
-	if (data.login === true) {
+	if (data) {
+		console.log("login success");
 		res.redirect("/auth");
-	} else if (data.login === false) {
+	} else {
+		console.log("login faild");
 		res.redirect("/auth/notlogin");
 	}
 });
