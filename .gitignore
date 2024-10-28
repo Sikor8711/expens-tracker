@@ -1,0 +1,14 @@
+# Environment variables
+.env
+.env.*
+
+# Dependencies
+/node_modules/
+
+# Database
+db.js
+
+# Keys and Certificates
+/src/config/keys/**/*
+deno.lock
+
