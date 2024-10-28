@@ -16,6 +16,7 @@
     "dotenv": "npm:dotenv@^16.4.5",
     "ejs": "npm:ejs@^3.1.10",
     "express": "npm:express@^5.0.1",
+    "express-jwt": "npm:express-jwt@^8.4.1",
     "livereload": "npm:livereload@^0.9.3",
     "node-pg-migrate": "npm:node-pg-migrate@^7.7.1",
     "pg": "npm:pg@^8.13.1",

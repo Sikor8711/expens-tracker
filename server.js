@@ -1,9 +1,10 @@
 import express from "npm:express@5.0.1";
+import { expressjwt as jwt } from "npm:express-jwt@8.4.1";
 import * as path from "https://deno.land/std@0.188.0/path/mod.ts";
 import morgan from "npm:morgan";
-import api from "./src/routes/Api.js";
-import index from "./src/routes/Index.js";
-import auth from "./src/routes/Auth.js";
+import api from "./src/routes/apiRouter.js";
+import index from "./src/routes/indexRouter.js";
+import auth from "./src/routes/authRouter.js";
 
 import cookieParser from "npm:cookie-parser@1.4.7";
 import livereload from "npm:livereload@0.9.3";
@@ -15,9 +16,9 @@ const app = express();
 const port = 5137;
 const host = "192.168.1.247";
 const liveReloadServer = livereload.createServer({
-    exts: ["html", "css", "js", "ejs", "ts"], // Extensions to watch
-    post: 35729,
-    host: host,
+	exts: ["html", "css", "js", "ejs", "ts"], // Extensions to watch
+	post: 35729,
+	host: host,
 });
 
 app.set("view engine", "ejs");
@@ -35,12 +36,12 @@ app.use("/", auth);
 app.use(connectLiveReload());
 // Start the server
 app.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+	console.log(`Server is running on http://${host}:${port}`);
 });
 
 liveReloadServer.watch(path.join(__dirname, "src/**/*"));
 liveReloadServer.server.once("connection", () => {
-    setTimeout(() => {
-        liveReloadServer.refresh("/");
-    }, 500);
+	setTimeout(() => {
+		liveReloadServer.refresh("/");
+	}, 500);
 });
