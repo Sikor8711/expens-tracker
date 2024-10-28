@@ -1,0 +1,9 @@
+# Environment variables
+db.js
+.env
+.env.*
+
+/node_modules/
+# Keys and Certificates
+/src/config/keys/**/*
+deno.lock
