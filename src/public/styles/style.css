@@ -1,3 +1,30 @@
+@font-face {
+	font-family: "3dumb";
+	src: url("../fonts/3dumb/3Dumb.ttf");
+}
+@font-face {
+	font-family: "Multi";
+	src: url("../fonts/multi/Muli.ttf");
+}
+
+.wrapper.main h1 {
+	font-family: "3dumb";
+	font-weight: 600;
+	font-size: 3rem;
+	text-align: center;
+	padding-bottom: 1rem;
+}
+.wrapper.main p {
+	font-family: "3dumb";
+	font-weight: 600;
+	font-size: 1.5rem;
+
+	padding-bottom: 4rem;
+}
+.wrapper.main a button {
+	margin-top: 2rem;
+	font-size: 2rem;
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -5,6 +32,7 @@
 	color: #fff;
 }
 html {
+	font-family: "Multi";
 	height: 100vh;
 	width: 100vw;
 	background-image: linear-gradient(
@@ -34,10 +62,9 @@ html {
 	border-bottom-left-radius: 0;
 	border-bottom: 0;
 }
+.wrapper.main button,
 .tab button {
 	font-size: 1rem;
-	font-size: 600;
-
 	background-color: inherit;
 	border: none;
 	outline: none;
@@ -45,11 +72,14 @@ html {
 	padding: 0.5rem 0.5rem;
 	margin: 0.5rem 0.5rem;
 }
+
+.wrapper.main button.active,
 .tab button.active {
 	background-color: #7d0952;
 	border-radius: 0.3rem;
 	transition: 0.2s;
 }
+.wrapper.main button:hover,
 .tab button:hover {
 	background-color: #ba0477;
 	border-radius: 0.3rem;

@@ -83,7 +83,7 @@ export const jwtAuth = jwt2({
 		throw err;
 	},
 }).unless({
-	path: ["/auth", "/api/auth/login", "/api/auth/signin"],
+	path: ["/", "/auth", "/api/auth/login", "/api/auth/signin"],
 });
 
 export const noTokenError = (err, req, res, next) => {

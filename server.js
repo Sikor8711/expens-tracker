@@ -5,6 +5,7 @@ import morgan from "npm:morgan";
 import api from "./src/routes/apiRouter.js";
 import index from "./src/routes/indexRouter.js";
 import auth from "./src/routes/authRouter.js";
+import portal from "./src/routes/portalRouter.js";
 import cookieParser from "npm:cookie-parser@1.4.7";
 import livereload from "npm:livereload@0.9.3";
 import connectLiveReload from "npm:connect-livereload@0.6.1";
@@ -28,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from the "src" directory
 app.use(express.static(path.join(__dirname, "src/public")));
-app.use("/", jwtAuth, noTokenError, index, api, auth);
+app.use("/", jwtAuth, noTokenError, index, api, auth, portal);
 
 app.use(connectLiveReload());
 // Start the server
