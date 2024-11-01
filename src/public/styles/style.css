@@ -12,6 +12,7 @@
 	font-weight: 600;
 	font-size: 3rem;
 	text-align: center;
+	padding-top: 2rem;
 	padding-bottom: 1rem;
 }
 .wrapper.main p {
@@ -46,7 +47,6 @@ html {
 	display: flex;
 	flex-direction: column;
 	margin-inline: auto;
-	justify-content: center;
 	align-items: center;
 }
 

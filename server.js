@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from the "src" directory
 app.use(express.static(path.join(__dirname, "src/public")));
-app.use("/", jwtAuth, noTokenError, index, api, auth, portal);
+app.use(jwtAuth, noTokenError, index, api, auth, portal);
 
 app.use(connectLiveReload());
 // Start the server

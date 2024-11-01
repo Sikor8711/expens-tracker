@@ -12,11 +12,11 @@ export const up = (pgm) => {
 	// Categories table (each category can relate to many transactions)
 	pgm.createTable("users", {
 		id: { type: "serial", primaryKey: true },
-		firstName: { type: "varchar(100)", notNull: true },
-		lastName: { type: "varchar(100)", notNull: false },
+		first_name: { type: "varchar(100)", notNull: true },
+		last_name: { type: "varchar(100)", notNull: false },
 		email: { type: "varchar(100)", notNull: true, unique: true },
 		password: { type: "varchar(100)", notNull: true },
-		createdAt: {
+		created_at: {
 			type: "timestamp",
 			notNull: true,
 			default: pgm.func("current_timestamp"),
@@ -25,7 +25,7 @@ export const up = (pgm) => {
 	pgm.createTable("categories", {
 		id: { type: "serial", primaryKey: true },
 		name: { type: "varchar(100)", notNull: true, unique: true },
-		createdAt: {
+		created_at: {
 			type: "timestamp",
 			notNull: true,
 			default: pgm.func("current_timestamp"),
@@ -37,26 +37,49 @@ export const up = (pgm) => {
 		id: { type: "serial", primaryKey: true },
 		name: { type: "varchar(100)", notNull: true },
 		amount: { type: "numeric", notNull: true },
-		categoryId: {
+		transaction_date: { type: "datetime", notNull: true },
+		category_id: {
 			type: "integer",
 			references: '"categories"',
 			onDelete: "SET NULL",
 			notNull: false,
 		},
-		userId: {
+		user_id: {
 			type: "integer",
 			references: '"users"',
-			onDelete: "CASCADE",
+			onDelete: "SET NULL",
 			notNull: false,
 		},
-		createdAt: {
+		created_at: {
+			type: "timestamp",
+			notNull: true,
+			default: pgm.func("current_timestamp"),
+		},
+	});
+	pgm.createTable("family", {
+		id: { type: "serial", primaryKey: true },
+		name: { type: "varchar(100)", notNull: true },
+		transaction_id: {
+			type: "integer",
+			references: '"transactions"',
+			onDelete: "SET NULL",
+			notNull: false,
+		},
+		user_id: {
+			type: "integer",
+			references: '"users"',
+			onDelete: "SET NULL",
+			notNull: false,
+		},
+		created_at: {
 			type: "timestamp",
 			notNull: true,
 			default: pgm.func("current_timestamp"),
 		},
 	});
 
-	pgm.createIndex("transactions", ["categoryId", "userId"]);
+	pgm.createIndex("transactions", ["category_id", "user_id"]);
+	pgm.createIndex("family", ["transaction_id", "user_id"]);
 };
 
 /**
