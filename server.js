@@ -6,6 +6,8 @@ import api from "./src/routes/apiRouter.js";
 import index from "./src/routes/indexRouter.js";
 import auth from "./src/routes/authRouter.js";
 import portal from "./src/routes/portalRouter.js";
+
+import bodyParser from "npm:body-parser";
 import cookieParser from "npm:cookie-parser@1.4.7";
 import livereload from "npm:livereload@0.9.3";
 import connectLiveReload from "npm:connect-livereload@0.6.1";
@@ -25,7 +27,7 @@ app.set("view engine", "ejs");
 app.use(morgan("tiny"));
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the "src" directory
 app.use(express.static(path.join(__dirname, "src/public")));

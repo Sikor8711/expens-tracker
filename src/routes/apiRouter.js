@@ -1,9 +1,14 @@
 import { Router } from "npm:express@5.0.1";
-import { getUserTransaction } from "../controllers/UserController.js";
+import {
+	addUserTransaction,
+	getUserTransaction,
+} from "../controllers/UserController.js";
 
 const router = Router();
 
 router.post("/api/transactions", getUserTransaction);
+
+router.post("/api/transaction/add", addUserTransaction);
 
 router.get("/api/test", (req, res) => {
 	res.send("hej");

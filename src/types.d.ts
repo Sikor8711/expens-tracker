@@ -41,3 +41,13 @@ export interface UnauthorizedError {
     name: string;
     inner: TokenExpiredError;
 }
+
+export interface Category {
+    id?: number;
+    name: string;
+    amount: number;
+    transaction_date: Date;
+    category_id: number;
+    user_id: number;
+    created_at?: Date;
+}
